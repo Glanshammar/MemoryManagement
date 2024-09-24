@@ -128,29 +128,137 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineQueue()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch with cases to enqueue items or dequeue items
-             * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-            */
+            Queue<string> queue = new Queue<string>();
+            
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("1. Add a person to the queue (Enqueue)");
+            Console.WriteLine("2. Serve a person from the queue (Dequeue)");
+            Console.WriteLine("3. View the person at the front of the queue (Peek)");
+            
+            try
+            {
+                while (true)
+                {
+                    Console.WriteLine("\nCurrent queue: " + (queue.Count > 0 ? string.Join(", ", queue) : "empty"));
+                    Console.WriteLine("Number of people in queue: " + queue.Count);
+
+                    char choice = Console.ReadLine()![0];
+
+                    switch (choice)
+                    {
+                        case '1':
+                            Console.Write("Enter the name of the person to add to the queue: ");
+                            string name = Console.ReadLine()?.Trim() ?? string.Empty;
+                            if (string.IsNullOrEmpty(name))
+                            {
+                                Console.WriteLine("Couldn't add the person to the queue. Please try again.");
+                            }
+
+                            queue.Enqueue(name);
+                            Console.WriteLine($"{name} has been added to the queue.");
+                            break;
+
+                        case '2':
+                            if (queue.Count > 0)
+                            {
+                                string dequeuedPerson = queue.Dequeue();
+                                Console.WriteLine($"{dequeuedPerson} has been served and left the queue.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("The queue is empty. No one to serve.");
+                            }
+
+                            break;
+
+                        case '3':
+                            if (queue.Count > 0)
+                            {
+                                Console.WriteLine($"The person at the front of the queue is: {queue.Peek()}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("The queue is empty.");
+                            }
+
+                            break;
+
+                        case '0':
+                            return;
+
+                        default:
+                            Console.WriteLine("Invalid choice. Please try again.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Please try again.");
+            }
         }
 
+        /*
+            Simulering av ICA-kön:
+
+            1. ICA öppnar och kön till kassan är tom
+            Aktuell kö: Ingen
+            Antal personer i kön: 0
+
+            2. Kalle ställer sig i kön
+            Välj alternativ: 1
+            Ange namn på personen: Kalle
+            Aktuell kö: Kalle
+            Antal personer i kön: 1
+
+            3. Greta ställer sig i kön
+            Välj alternativ: 1
+            Ange namn på personen: Greta
+            Aktuell kö: Kalle, Greta
+            Antal personer i kön: 2
+
+            4. Kalle blir expedierad och lämnar kön
+            Välj alternativ: 2
+            Aktuell kö: Greta
+            Antal personer i kön: 1
+
+            5. Stina ställer sig i kön
+            Välj alternativ: 1
+            Ange namn på personen: Stina
+            Aktuell kö: Greta, Stina
+            Antal personer i kön: 2
+
+            6. Greta blir expedierad och lämnar kön
+            Välj alternativ: 2
+            Aktuell kö: Stina
+            Antal personer i kön: 1
+
+            7. Olle ställer sig i kön
+            Välj alternativ: 1
+            Ange namn på personen: Olle
+            Aktuell kö: Stina, Olle
+            Antal personer i kön: 2
+        */
+
+        
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
         static void ExamineStack()
         {
             /*
-             * Loop this method until the user inputs something to exit to main menue.
+             * Loop this method until the user inputs something to exit to main menu.
              * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
+             * Make sure to look at the stack after pushing and poping to see how it behaves
             */
         }
 
         static void CheckParanthesis()
         {
             /*
-             * Use this method to check if the paranthesis in a string is Correct or incorrect.
+             * Use this method to check if the parenthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */

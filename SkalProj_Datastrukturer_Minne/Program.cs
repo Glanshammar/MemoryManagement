@@ -62,24 +62,67 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineList()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch statement with cases '+' and '-'
-             * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
-             * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
-             * In both cases, look at the count and capacity of the list
-             * As a default case, tell them to use only + or -
-             * Below you can see some inspirational code to begin working.
-            */
+            List<string> theList = new List<string>();
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            while (true)
+            {
+                Console.WriteLine($"Current list count: {theList.Count}, capacity: {theList.Capacity}");
+                Console.WriteLine("Enter '+item' to add, '-item' to remove, or 'exit' to quit:");
+                string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
-            //switch(nav){...}
+                if (input.ToLower() == "exit")
+                    break;
+
+                if (input.Length < 2)
+                {
+                    Console.WriteLine("Please use '+' or '-' followed by an item.");
+                    continue;
+                }
+
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        Console.WriteLine($"Added '{value}' to the list.");
+                        break;
+                    case '-':
+                        if (theList.Remove(value))
+                            Console.WriteLine($"Removed '{value}' from the list.");
+                        else
+                            Console.WriteLine($"'{value}' not found in the list.");
+                        break;
+                    default:
+                        Console.WriteLine("Please use only '+' or '-'.");
+                        break;
+                }
+            }
         }
+        
+        /*
+        När ökar listans kapacitet?
+        Listans kapacitet ökar när antalet element överstiger den nuvarande kapaciteten.
 
+        Med hur mycket ökar kapaciteten?
+        Kapaciteten fördubblas vanligtvis när den behöver öka. Till exempel, från 4 till 8, sedan till 16, och så vidare.
+
+        Varför ökar inte listans kapacitet i samma takt som element läggs till?
+        För att optimera prestanda och minnesanvändning. Att öka kapaciteten innebär att skapa en ny array och kopiera element,
+        vilket är kostsamt. Genom att fördubbla kapaciteten minskar vi frekvensen av dessa operationer.
+
+        Minskar kapaciteten när element tas bort ur listan?
+        Nej, kapaciteten minskar inte automatiskt när element tas bort. Den behåller den maximala kapacitet den har nått.
+
+        När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+            - När du vet den exakta storleken på samlingen i förväg och den inte kommer att ändras.
+            - När du behöver optimera minnesanvändningen och inte vill ha någon extra kapacitet.
+            - När du behöver absolut bästa prestanda för indexerad åtkomst och inte behöver ändra storlek på samlingen.
+            - I prestandakritiska scenarier där overheaden av en List<T> kan vara märkbar.
+        */
+        
+        
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>

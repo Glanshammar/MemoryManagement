@@ -41,7 +41,7 @@ namespace SkalProj_Datastrukturer_Minne
                         ExamineStack();
                         break;
                     case '4':
-                        CheckParanthesis();
+                        CheckParenthesis();
                         break;
                     /*
                      * Extend the menu to include the recursive 
@@ -248,23 +248,77 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
-            /*
-             * Loop this method until the user inputs something to exit to main menu.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and poping to see how it behaves
-            */
+            
         }
 
-        static void CheckParanthesis()
+        static void CheckParenthesis()
         {
-            /*
-             * Use this method to check if the parenthesis in a string is Correct or incorrect.
-             * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
-             * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
-             */
+            Stack<char> stack = new Stack<char>();
 
+            while (true)
+            {
+                Console.WriteLine("Enter the characters. Legal characters are: () [] {}, or enter 'exit' to quit.");
+                Console.Write(">> ");
+                
+                string input = Console.ReadLine()?.Trim() ?? string.Empty;
+
+                if (input.ToLower() == "exit")
+                    return;
+                
+                bool isBalanced = true; // Keeps being true if no errors are encountered
+                int errorPosition = -1; // Used to check which character at what index is causing errors.
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    char c = input[i];
+
+                    if (c == '(' || c == '[' || c == '{')
+                    {
+                        stack.Push(c);
+                    }
+                    else if (c == ')' || c == ']' || c == '}')
+                    {
+                        if (stack.Count == 0)
+                        {
+                            isBalanced = false;
+                            errorPosition = i;
+                            break;
+                        }
+
+                        char top = stack.Pop();
+
+                        if ((c == ')' && top != '(') ||
+                            (c == ']' && top != '[') ||
+                            (c == '}' && top != '{'))
+                        {
+                            isBalanced = false;
+                            errorPosition = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (isBalanced && stack.Count == 0)
+                {
+                    Console.WriteLine("The input is balanced. All parentheses, brackets, and braces are properly matched.");
+                }
+                else
+                {
+                    Console.WriteLine("The input is not balanced.");
+                    if (errorPosition != -1)
+                    {
+                        Console.WriteLine($"Error at position {errorPosition + 1}: Mismatched or extra closing character.");
+                    }
+                    else if (stack.Count > 0)
+                    {
+                        Console.WriteLine($"Error: {stack.Count} opening character(s) were not closed.");
+                    }
+                }
+
+                stack.Clear(); // Clear the stack for the next input
+                Console.WriteLine();
+            }
         }
 
     }
 }
-

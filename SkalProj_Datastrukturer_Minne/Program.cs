@@ -259,27 +259,34 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
+                // Prompt user for input
                 Console.WriteLine("Enter the characters. Legal characters are: () [] {}, or enter 'exit' to quit.");
                 Console.Write(">> ");
-                
+
+                // Read user input, trim whitespace, and handle null input
                 string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
+                // Check if user wants to exit the program
                 if (input.ToLower() == "exit")
                     return;
-                
-                bool isBalanced = true; // Keeps being true if no errors are encountered
-                int errorPosition = -1; // Used to check which character at what index is causing errors.
 
+                bool isBalanced = true; // Flag to track if brackets are balanced
+                int errorPosition = -1; // Track position of any error found
+
+                // Iterate through each character in the input
                 for (int i = 0; i < input.Length; i++)
                 {
                     char c = input[i];
 
+                    // If it's an opening bracket, push it onto the stack
                     if (c == '(' || c == '[' || c == '{')
                     {
                         stack.Push(c);
                     }
+                    // If it's a closing bracket
                     else if (c == ')' || c == ']' || c == '}')
                     {
+                        // If stack is empty, we have a closing bracket without an opening one
                         if (stack.Count == 0)
                         {
                             isBalanced = false;
@@ -287,8 +294,10 @@ namespace SkalProj_Datastrukturer_Minne
                             break;
                         }
 
+                        // Pop the top element from the stack, to check for matching brackets
                         char top = stack.Pop();
 
+                        // Check if the current closing bracket matches the last opening bracket
                         if ((c == ')' && top != '(') ||
                             (c == ']' && top != '[') ||
                             (c == '}' && top != '{'))
@@ -300,27 +309,32 @@ namespace SkalProj_Datastrukturer_Minne
                     }
                 }
 
+                // If all brackets are balanced and stack is empty, input is valid
                 if (isBalanced && stack.Count == 0)
                 {
-                    Console.WriteLine("The input is balanced. All parentheses, brackets, and braces are properly matched.");
+                    Console.WriteLine(
+                        "The input is balanced. All parentheses, brackets, and braces are properly matched.");
                 }
                 else
                 {
                     Console.WriteLine("The input is not balanced.");
                     if (errorPosition != -1)
                     {
-                        Console.WriteLine($"Error at position {errorPosition + 1}: Mismatched or extra closing character.");
+                        // Report the position of mismatched or extra closing bracket
+                        Console.WriteLine(
+                            $"Error at position {errorPosition + 1}: Mismatched or extra closing character.");
                     }
                     else if (stack.Count > 0)
                     {
+                        // Report the number of unclosed opening brackets
                         Console.WriteLine($"Error: {stack.Count} opening character(s) were not closed.");
                     }
                 }
 
-                stack.Clear(); // Clear the stack for the next input
+                // Clear the stack for the next input
+                stack.Clear();
                 Console.WriteLine();
             }
         }
-
     }
 }

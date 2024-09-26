@@ -4,10 +4,6 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
-        /// <summary>
-        /// The main method, vill handle the menus for the program
-        /// </summary>
-        /// <param name="args"></param>
         static void Main()
         {
 
@@ -59,9 +55,7 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
 
-        /// <summary>
-        /// Examines the datastructure List
-        /// </summary>
+        
         static void ExamineList()
         {
             List<string> theList = new List<string>();
@@ -104,20 +98,21 @@ namespace SkalProj_Datastrukturer_Minne
         }
 
         /*
-        När ökar listans kapacitet?
-        Listans kapacitet ökar när antalet element överstiger den nuvarande kapaciteten.
+        Q: När ökar listans kapacitet?
+        A: Listans kapacitet ökar när antalet element överstiger kapaciteten.
 
-        Med hur mycket ökar kapaciteten?
-        Kapaciteten fördubblas vanligtvis när den behöver öka. Till exempel, från 4 till 8, sedan till 16, och så vidare.
+        Q: Med hur mycket ökar kapaciteten?
+        A: Kapaciteten fördubblas vanligtvis när den behöver öka. Till exempel, från 4 till 8, sedan till 16, och så vidare.
 
-        Varför ökar inte listans kapacitet i samma takt som element läggs till?
-        För att optimera prestanda och minnesanvändning. Att öka kapaciteten innebär att skapa en ny array och kopiera element,
+        Q: Varför ökar inte listans kapacitet i samma takt som element läggs till?
+        A: För att optimera prestanda och minnesanvändning. Att öka kapaciteten innebär att skapa en ny array och kopiera element,
         vilket är kostsamt. Genom att fördubbla kapaciteten minskar vi frekvensen av dessa operationer.
 
-        Minskar kapaciteten när element tas bort ur listan?
-        Nej, kapaciteten minskar inte automatiskt när element tas bort. Den behåller den maximala kapacitet den har nått.
+        Q: Minskar kapaciteten när element tas bort ur listan?
+        A: Nej, kapaciteten minskar inte automatiskt när element tas bort. Den behåller den maximala kapacitet den har nått.
+        För att minska på listan så används List.TrimExcess() metoden.
 
-        När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+        Q: När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
             - När du vet den exakta storleken på samlingen i förväg och den inte kommer att ändras.
             - När du behöver optimera minnesanvändningen och inte vill ha någon extra kapacitet.
             - När du behöver absolut bästa prestanda för indexerad åtkomst och inte behöver ändra storlek på samlingen.
@@ -125,9 +120,7 @@ namespace SkalProj_Datastrukturer_Minne
         */
 
 
-        /// <summary>
-        /// Examines the datastructure Queue
-        /// </summary>
+        
         static void ExamineQueue()
         {
             Queue<string> queue = new Queue<string>();
@@ -203,45 +196,14 @@ namespace SkalProj_Datastrukturer_Minne
         }
 
         /*
-            Simulering av ICA-kön:
-
-            1. ICA öppnar och kön till kassan är tom
-            Aktuell kö: Ingen
-            Antal personer i kön: 0
-
-            2. Kalle ställer sig i kön
-            Välj alternativ: 1
-            Ange namn på personen: Kalle
-            Aktuell kö: Kalle
-            Antal personer i kön: 1
-
-            3. Greta ställer sig i kön
-            Välj alternativ: 1
-            Ange namn på personen: Greta
-            Aktuell kö: Kalle, Greta
-            Antal personer i kön: 2
-
-            4. Kalle blir expedierad och lämnar kön
-            Välj alternativ: 2
-            Aktuell kö: Greta
-            Antal personer i kön: 1
-
-            5. Stina ställer sig i kön
-            Välj alternativ: 1
-            Ange namn på personen: Stina
-            Aktuell kö: Greta, Stina
-            Antal personer i kön: 2
-
-            6. Greta blir expedierad och lämnar kön
-            Välj alternativ: 2
-            Aktuell kö: Stina
-            Antal personer i kön: 1
-
-            7. Olle ställer sig i kön
-            Välj alternativ: 1
-            Ange namn på personen: Olle
-            Aktuell kö: Stina, Olle
-            Antal personer i kön: 2
+        Simulering av ICA-kön:
+            a. ICA öppnar: []
+            b. Kalle ställer sig i kön: [Kalle]
+            c. Greta ställer sig i kön: [Kalle, Greta]
+            d. Kalle blir expedierad: [Greta]
+            e. Stina ställer sig i kön: [Greta, Stina]
+            f. Greta blir expedierad: [Stina]
+            g. Olle ställer sig i kön: [Stina, Olle]
         */
 
 
@@ -250,7 +212,7 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
-
+            
         }
 
         static void CheckParenthesis()
@@ -259,14 +221,11 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
-                // Prompt user for input
                 Console.WriteLine("Enter the characters. Legal characters are: () [] {}, or enter 'exit' to quit.");
                 Console.Write(">> ");
 
-                // Read user input, trim whitespace, and handle null input
                 string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
-                // Check if user wants to exit the program
                 if (input.ToLower() == "exit")
                     return;
 

@@ -13,7 +13,8 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine(
+                    "Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
@@ -29,6 +30,7 @@ namespace SkalProj_Datastrukturer_Minne
                     Console.Clear();
                     Console.WriteLine("Please enter some input!");
                 }
+
                 switch (input)
                 {
                     case '1':
@@ -44,7 +46,7 @@ namespace SkalProj_Datastrukturer_Minne
                         CheckParenthesis();
                         break;
                     /*
-                     * Extend the menu to include the recursive 
+                     * Extend the menu to include the recursive
                      * and iterative exercises.
                      */
                     case '0':
@@ -100,7 +102,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
-        
+
         /*
         När ökar listans kapacitet?
         Listans kapacitet ökar när antalet element överstiger den nuvarande kapaciteten.
@@ -121,21 +123,21 @@ namespace SkalProj_Datastrukturer_Minne
             - När du behöver absolut bästa prestanda för indexerad åtkomst och inte behöver ändra storlek på samlingen.
             - I prestandakritiska scenarier där overheaden av en List<T> kan vara märkbar.
         */
-        
-        
+
+
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
         static void ExamineQueue()
         {
             Queue<string> queue = new Queue<string>();
-            
+
             Console.WriteLine("Choose an option:");
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. Add a person to the queue (Enqueue)");
             Console.WriteLine("2. Serve a person from the queue (Dequeue)");
             Console.WriteLine("3. View the person at the front of the queue (Peek)");
-            
+
             try
             {
                 while (true)
@@ -242,13 +244,13 @@ namespace SkalProj_Datastrukturer_Minne
             Antal personer i kön: 2
         */
 
-        
+
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
         static void ExamineStack()
         {
-            
+
         }
 
         static void CheckParenthesis()

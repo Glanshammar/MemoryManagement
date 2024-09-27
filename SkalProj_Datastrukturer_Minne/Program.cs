@@ -4,19 +4,27 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
+        static void PrintMenu()
+        {
+            Console.WriteLine(
+                "Navigate through the application by inputting the number of your choice:"
+                + "\n0. Exit the application"
+                + "\n1. Examine a List"
+                + "\n2. Examine a Queue"
+                + "\n3. Examine a Stack"
+                + "\n4. Check Parenthesis"
+                + "\n5. Reverse String"
+                + "\n6. Recursive Functions"
+                + "\n7. Iterative Functions");
+        }
+        
         static void Main()
         {
-
+            PrintMenu();
+            
             while (true)
             {
-                Console.WriteLine(
-                    "Please navigate through the application by inputting the number of your choice:"
-                    + "\n1. Examine a List"
-                    + "\n2. Examine a Queue"
-                    + "\n3. Examine a Stack"
-                    + "\n4. Check Parenthesis"
-                    + "\n5. Reverse String"
-                    + "\n0. Exit the application");
+                Console.Write(">> ");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
                 {
@@ -25,7 +33,7 @@ namespace SkalProj_Datastrukturer_Minne
                 catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
                 {
                     Console.Clear();
-                    Console.WriteLine("Please enter some input!");
+                    PrintMenu();
                 }
 
                 switch (input)
@@ -45,11 +53,18 @@ namespace SkalProj_Datastrukturer_Minne
                     case '5':
                         ReverseText();
                         break;
+                    case '6':
+                        RecursiveFunctions();
+                        break;
+                    case '7':
+                        IterativeFunctions();
+                        break;
                     case '0':
                         Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Please enter a valid input.");
+                        PrintMenu();
                         break;
                 }
             }
@@ -64,6 +79,7 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 Console.WriteLine($"Current list count: {theList.Count}, capacity: {theList.Capacity}");
                 Console.WriteLine("Enter '+item' to add, '-item' to remove, or 'exit' to quit:");
+                Console.Write(">> ");
                 string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
                 if (input.ToLower() == "exit")
@@ -125,18 +141,19 @@ namespace SkalProj_Datastrukturer_Minne
         {
             Queue<string> queue = new Queue<string>();
 
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("0. Exit");
-            Console.WriteLine("1. Add a person to the queue (Enqueue)");
-            Console.WriteLine("2. Serve a person from the queue (Dequeue)");
-            Console.WriteLine("3. View the person at the front of the queue (Peek)");
+            Console.WriteLine("Choose an option:"
+                + "0. Exit"
+                + "1. Add a person to the queue (Enqueue)"
+                + "2. Serve a person from the queue (Dequeue)"
+                + "3. View the person at the front of the queue (Peek)"
+                );
 
             try
             {
                 while (true)
                 {
                     Console.WriteLine("\nCurrent queue: " + (queue.Count > 0 ? string.Join(", ", queue) : "empty"));
-                    Console.WriteLine("Number of people in queue: " + queue.Count);
+                    Console.Write("Number of people in queue: " + queue.Count);
 
                     char choice = Console.ReadLine()![0];
 
@@ -205,7 +222,7 @@ namespace SkalProj_Datastrukturer_Minne
             f. Greta blir expedierad: [Stina]
             g. Olle ställer sig i kön: [Stina, Olle]
             h. Stina blir expedierad: [Olle]
-            j. Olle blir expedierad: []
+            i. Olle blir expedierad: []
         */
 
         
@@ -253,7 +270,14 @@ namespace SkalProj_Datastrukturer_Minne
             
             AddToQueue("Olle"); // g. Olle ställer sig i kön: [Stina, Olle]
             RemoveFromQueue(); // h. Stina blir expedierad: [Olle]
-            RemoveFromQueue(); // j. Olle blir expedierad: []
+            RemoveFromQueue(); // i. Olle blir expedierad: []
+            
+            /*
+            Även om det är möjligt att göra en kö med stackfunktioner så är det inte effektivt och kan skapa problem.
+            Det kräver mer minne från att behöva två Stack<T> objekt och gör koden mer komplex som ökar risken för buggar och minskar läsbarheten.
+            Medan inbyggda köoperationer som enqueue och dequeue vanligtvis är O(1), kan simulering av dessa med stackar
+            leda till O(n) för vissa operationer, särskilt dequeue.
+            */ 
         }
         
 
@@ -364,7 +388,94 @@ namespace SkalProj_Datastrukturer_Minne
                 reversedString += charStack.Pop();
             }
 
-            Console.WriteLine("The reversed text is: " + reversedString);
+            Console.WriteLine("The reversed text is: " + reversedString +"\n");
+        }
+        
+        static int RecursiveOdd(int n)
+        {
+            if (n == 1)
+                return 1;
+            else
+                return 2 + RecursiveOdd(n - 1);
+        }
+
+        static int RecursiveEven(int n)
+        {
+            if (n == 1)
+                return 2;
+            else
+                return 2 + RecursiveEven(n - 1);
+        }
+
+        static int Fibonacci(int n)
+        {
+            if (n <= 1)
+                return n;
+            else
+                return Fibonacci(n - 1) + Fibonacci(n - 2);
+        }
+
+        static void RecursiveFunctions()
+        {
+            Console.WriteLine("RecursiveOdd(1) = " + RecursiveOdd(1));
+            Console.WriteLine("RecursiveOdd(3) = " + RecursiveOdd(3));
+            Console.WriteLine("RecursiveOdd(5) = " + RecursiveOdd(5));
+
+            Console.WriteLine("\nRecursiveEven(1) = " + RecursiveEven(1));
+            Console.WriteLine("RecursiveEven(3) = " + RecursiveEven(3));
+            Console.WriteLine("RecursiveEven(5) = " + RecursiveEven(5));
+
+            Console.WriteLine("\nFibonacci(5) = " + Fibonacci(5));
+            Console.WriteLine("Fibonacci(7) = " + Fibonacci(7));
+        }
+        
+        static int IterativeOdd(int n)
+        {
+            int result = 1;
+            for (int i = 1; i < n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+
+        // 2. IterativeEven function
+        static int IterativeEven(int n)
+        {
+            int result = 2;
+            for (int i = 1; i < n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+
+        // 3. IterativeFibonacci function
+        static int IterativeFibonacci(int n)
+        {
+            if (n <= 1) return n;
+            int a = 0, b = 1, c;
+            for (int i = 2; i <= n; i++)
+            {
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            return b;
+        }
+
+        static void IterativeFunctions()
+        {
+            Console.WriteLine("IterativeOdd(1) = " + IterativeOdd(1));
+            Console.WriteLine("IterativeOdd(3) = " + IterativeOdd(3));
+            Console.WriteLine("IterativeOdd(5) = " + IterativeOdd(5));
+
+            Console.WriteLine("\nIterativeEven(1) = " + IterativeEven(1));
+            Console.WriteLine("IterativeEven(3) = " + IterativeEven(3));
+            Console.WriteLine("IterativeEven(5) = " + IterativeEven(5));
+
+            Console.WriteLine("\nIterativeFibonacci(5) = " + IterativeFibonacci(5));
+            Console.WriteLine("IterativeFibonacci(7) = " + IterativeFibonacci(7));
         }
     }
 }

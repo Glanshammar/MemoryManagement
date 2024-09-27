@@ -10,11 +10,12 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine(
-                    "Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                    "Please navigate through the application by inputting the number of your choice:"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
-                    + "\n4. CheckParenthesis"
+                    + "\n4. Check Parenthesis"
+                    + "\n5. Reverse String"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -41,15 +42,14 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParenthesis();
                         break;
-                    /*
-                     * Extend the menu to include the recursive
-                     * and iterative exercises.
-                     */
+                    case '5':
+                        ReverseText();
+                        break;
                     case '0':
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        Console.WriteLine("Please enter a valid input.");
                         break;
                 }
             }
@@ -206,10 +206,7 @@ namespace SkalProj_Datastrukturer_Minne
             g. Olle ställer sig i kön: [Stina, Olle]
         */
 
-
-        /// <summary>
-        /// Examines the datastructure Stack
-        /// </summary>
+        
         static void ExamineStack()
         {
             Stack<string> mainStack = new Stack<string>();
@@ -254,6 +251,7 @@ namespace SkalProj_Datastrukturer_Minne
             
             AddToQueue("Olle"); // g. Olle ställer sig i kön: [Stina, Olle]
         }
+        
 
         static void CheckParenthesis()
         {

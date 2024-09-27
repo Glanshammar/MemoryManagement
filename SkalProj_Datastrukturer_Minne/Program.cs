@@ -212,7 +212,47 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
+            Stack<string> mainStack = new Stack<string>();
+            Stack<string> tempStack = new Stack<string>();
+
+            // Helper function to add a person to the queue
+            void AddToQueue(string name)
+            {
+                mainStack.Push(name);
+                Console.WriteLine($"{name} ställer sig i kön: {PrintQueue()}");
+            }
+
+            // Helper function to remove a person from the queue
+            void RemoveFromQueue()
+            {
+                if (mainStack.Count == 0) return;
+
+                string person = string.Empty;
+                while (mainStack.Count > 1)
+                    tempStack.Push(mainStack.Pop());
+                
+                person = mainStack.Pop();
+                while (tempStack.Count > 0)
+                    mainStack.Push(tempStack.Pop());
+                
+                Console.WriteLine($"{person} blir expedierad: {PrintQueue()}");
+            }
+
+            string PrintQueue()
+            {
+                return "[" + string.Join(", ", mainStack.Reverse()) + "]";
+            }
+
+            Console.WriteLine("ICA öppnar: []"); // a. ICA öppnar: []
             
+            AddToQueue("Kalle"); // b. Kalle ställer sig i kön: [Kalle]
+            AddToQueue("Greta"); // c. Greta ställer sig i kön: [Kalle, Greta]
+            RemoveFromQueue(); // d. Kalle blir expedierad: [Greta]
+            
+            AddToQueue("Stina"); // e. Stina ställer sig i kön: [Greta, Stina]
+            RemoveFromQueue(); // f. Greta blir expedierad: [Stina]
+            
+            AddToQueue("Olle"); // g. Olle ställer sig i kön: [Stina, Olle]
         }
 
         static void CheckParenthesis()

@@ -333,5 +333,34 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.WriteLine();
             }
         }
+        
+        public static void ReverseText()
+        {
+            Console.Write("Text to be reversed: ");
+            string input = Console.ReadLine()?.Trim() ?? string.Empty;
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Text is empty.");
+                return;
+            }
+
+            Stack<char> charStack = new Stack<char>();
+
+            // Add each character to the stack
+            foreach (char c in input)
+            {
+                charStack.Push(c);
+            }
+
+            // Creating the reversed string and adds the last character from the Stack<char> to reversedString
+            string reversedString = string.Empty;
+            while (charStack.Count > 0)
+            {
+                reversedString += charStack.Pop();
+            }
+
+            Console.WriteLine("The reversed text is: " + reversedString);
+        }
     }
 }

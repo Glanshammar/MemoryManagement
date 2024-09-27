@@ -204,6 +204,8 @@ namespace SkalProj_Datastrukturer_Minne
             e. Stina ställer sig i kön: [Greta, Stina]
             f. Greta blir expedierad: [Stina]
             g. Olle ställer sig i kön: [Stina, Olle]
+            h. Stina blir expedierad: [Olle]
+            j. Olle blir expedierad: []
         */
 
         
@@ -250,6 +252,8 @@ namespace SkalProj_Datastrukturer_Minne
             RemoveFromQueue(); // f. Greta blir expedierad: [Stina]
             
             AddToQueue("Olle"); // g. Olle ställer sig i kön: [Stina, Olle]
+            RemoveFromQueue(); // h. Stina blir expedierad: [Olle]
+            RemoveFromQueue(); // j. Olle blir expedierad: []
         }
         
 

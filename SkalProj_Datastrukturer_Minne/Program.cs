@@ -395,24 +395,24 @@ namespace SkalProj_Datastrukturer_Minne
         {
             if (n == 1)
                 return 1;
-            else
-                return 2 + RecursiveOdd(n - 1);
+            
+            return 2 + RecursiveOdd(n - 1);
         }
 
         static int RecursiveEven(int n)
         {
             if (n == 1)
                 return 2;
-            else
-                return 2 + RecursiveEven(n - 1);
+            
+            return 2 + RecursiveEven(n - 1);
         }
 
         static int Fibonacci(int n)
         {
             if (n <= 1)
                 return n;
-            else
-                return Fibonacci(n - 1) + Fibonacci(n - 2);
+            
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
 
         static void RecursiveFunctions()
@@ -439,7 +439,6 @@ namespace SkalProj_Datastrukturer_Minne
             return result;
         }
 
-        // 2. IterativeEven function
         static int IterativeEven(int n)
         {
             int result = 2;
@@ -450,7 +449,6 @@ namespace SkalProj_Datastrukturer_Minne
             return result;
         }
 
-        // 3. IterativeFibonacci function
         static int IterativeFibonacci(int n)
         {
             if (n <= 1) return n;
